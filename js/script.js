@@ -7,6 +7,7 @@ let displayValue = "";
 //get the display, buttons
 const numberButtons = document.querySelectorAll(".number-button");
 let currentDisplay = document.querySelector(".current");
+let previousDisplay = document.querySelector(".previous");
 
 // Functions for add, substract, multiply, divide
 function add(a, b) {
@@ -50,7 +51,7 @@ function showNumbers() {
         button.addEventListener("click", () => {
             const number = button.textContent;
             displayValue += number;
-            currentDisplay.textContent += displayValue;
+            currentDisplay.textContent = displayValue;
         });
     });
 }
