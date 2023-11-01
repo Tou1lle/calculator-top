@@ -42,3 +42,15 @@ function operate(a, operator, b) {
 
     return result;
 }
+
+//when clicking on buttons, display them
+function showNumbers() {
+    numberButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const number = button.textContent;
+            currentDisplay.textContent += number;
+        });
+    });
+}
+
+showNumbers();
