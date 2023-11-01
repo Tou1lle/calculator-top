@@ -1,7 +1,8 @@
-//variables for 2 numbers and an operator
+//variables for 2 numbers and an operator, a variable for display
 let firstNumber;
 let secondNumber;
 let operator;
+let displayValue = "";
 
 //get the display, buttons
 const numberButtons = document.querySelectorAll(".number-button");
@@ -48,7 +49,8 @@ function showNumbers() {
     numberButtons.forEach(button => {
         button.addEventListener("click", () => {
             const number = button.textContent;
-            currentDisplay.textContent += number;
+            displayValue += number;
+            currentDisplay.textContent += displayValue;
         });
     });
 }
