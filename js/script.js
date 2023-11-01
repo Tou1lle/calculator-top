@@ -10,6 +10,9 @@ const operatorButtons = document.querySelectorAll(".operator-button");
 const equalButton = document.querySelector(".operator-button-equal");
 let currentDisplay = document.querySelector(".current");
 let previousDisplay = document.querySelector(".previous");
+const acButton = document.querySelector(".special-button-ac");
+const delButton = document.querySelector(".special-button-del");
+const modButton = document.querySelector(".special-button-mod");
 
 // Functions for add, substract, multiply, divide
 function add(a, b) {
@@ -43,6 +46,8 @@ function operate(a, operator, b) {
             return "ERROR: Division 0!";
         }
         result = divide(a, b);
+    } else if (operator === "%"){
+        result = a % b;
     } else {
         return "ERROR";
     }
@@ -79,4 +84,24 @@ equalButton.addEventListener("click", () => {
     displayValue = result.toString();
     currentDisplay.textContent = displayValue;
     previousDisplay.textContent = "";
+});
+
+acButton.addEventListener("click", () => {
+    firstNumber = undefined;
+    secondNumber = undefined;
+    operator = undefined;
+    displayValue = "";
+    currentDisplay.textContent = displayValue;
+});
+
+delButton.addEventListener("click", () => {
+    displayValue = displayValue.slice(0, -1);
+    currentDisplay.textContent = displayValue;
+});
+
+modButton.addEventListener("click", () => {
+    firstNumber = parseFloat(displayValue);
+    operator = modButton.textContent;
+    displayValue = "";
+    previousDisplay.textContent = firstNumber + `${operator}`;
 });
