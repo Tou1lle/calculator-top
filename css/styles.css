@@ -99,3 +99,8 @@ button {
 #zero {
     flex-grow: 1000;
 }
+
+button:hover {
+    background-color: honeydew;
+    color: black;
+}
