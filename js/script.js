@@ -31,6 +31,14 @@ function divide(a, b) {
     return (a / b).toFixed(4);
 }
 
+function setFirstNumber(firstN) {
+    firstNumber = parseFloat(firstN);
+}
+
+function setSecondNumber(secondN) {
+    secondNumber = parseFloat(secondN);
+}
+
 // a function the creates an operation
 function operate(a, operator, b) {
     let result = 0;
@@ -71,7 +79,7 @@ showNumbers();
 operatorButtons.forEach(button => {
     button.addEventListener("click", () => {
         if (button.textContent === "=") return;
-        firstNumber = parseFloat(displayValue);
+        setFirstNumber(displayValue);
         operator = button.textContent;
         displayValue = "";
         previousDisplay.textContent = firstNumber + `${operator}`;
@@ -79,7 +87,7 @@ operatorButtons.forEach(button => {
 });
 
 equalButton.addEventListener("click", () => {
-    secondNumber = parseFloat(displayValue);
+    setSecondNumber(displayValue);
     let result = operate(firstNumber, operator, secondNumber);
     displayValue = result.toString();
     currentDisplay.textContent = displayValue;
