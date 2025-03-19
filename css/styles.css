@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: gold;
+    background-color: #d6d6d2;
     margin: 0px;
 }
 
@@ -101,6 +101,6 @@ button {
 }
 
 button:hover {
-    background-color: honeydew;
+    background-color: #d6d6d2;
     color: black;
 }
