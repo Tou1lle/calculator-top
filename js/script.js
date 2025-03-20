@@ -140,6 +140,7 @@ equalButton.addEventListener("click", () => {
   setDisplayValue(result.toString());
   setCurrentDisplay(displayValue);
   clearPreviousDisplay();
+  clearOperator();
 });
 
 acButton.addEventListener("click", () => {
