@@ -39,6 +39,54 @@ function setSecondNumber(secondN) {
   secondNumber = parseFloat(secondN);
 }
 
+function setOperator(operatorButton) {
+  operator = operatorButton;
+}
+
+function setDisplayValue(textNumber) {
+  displayValue = textNumber;
+}
+
+function setCurrentDisplay(textNumber) {
+  currentDisplay.textContent = textNumber;
+}
+
+function setPreviousDisplay(textNumber) {
+  previousDisplay.textContent = textNumber;
+}
+
+function clearDisplayValue() {
+  displayValue = "";
+}
+
+function clearCurrentDisplay() {
+  currentDisplay.textContent = "";
+}
+
+function clearPreviousDisplay() {
+  previousDisplay.textContent = "";
+}
+
+function clearFirstN() {
+  firstNumber = null;
+}
+
+function clearSecondN() {
+  secondNumber = null;
+}
+
+function clearOperator() {
+  operator = null;
+}
+
+function increaseDisplayValue(buttonNumber) {
+  displayValue += buttonNumber;
+}
+
+function decreaseDisplayValueBy1() {
+  displayValue = displayValue.slice(0, -1);
+}
+
 // a function the creates an operation
 function operate(a, operator, b) {
   let result = 0;
@@ -68,8 +116,8 @@ function showNumbers() {
   numberButtons.forEach(button => {
     button.addEventListener("click", () => {
       const number = button.textContent;
-      displayValue += number;
-      currentDisplay.textContent = displayValue;
+      increaseDisplayValue(number);
+      setCurrentDisplay(displayValue);
     });
   });
 }
@@ -80,36 +128,30 @@ operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
     if (button.textContent === "=") return;
     setFirstNumber(displayValue);
-    operator = button.textContent;
-    displayValue = "";
-    previousDisplay.textContent = firstNumber + `${operator}`;
+    setOperator(button.textContent);
+    clearDisplayValue();
+    setPreviousDisplay(`${firstNumber} ${operator}`);
   });
 });
 
 equalButton.addEventListener("click", () => {
   setSecondNumber(displayValue);
   let result = operate(firstNumber, operator, secondNumber);
-  displayValue = result.toString();
-  currentDisplay.textContent = displayValue;
-  previousDisplay.textContent = "";
+  setDisplayValue(result.toString());
+  setCurrentDisplay(displayValue);
+  clearPreviousDisplay();
 });
 
 acButton.addEventListener("click", () => {
-  firstNumber = undefined;
-  secondNumber = undefined;
-  operator = undefined;
-  displayValue = "";
-  currentDisplay.textContent = displayValue;
+  clearFirstN();
+  clearSecondN();
+  clearOperator();
+  clearDisplayValue();
+  clearCurrentDisplay();
+  clearPreviousDisplay();
 });
 
 delButton.addEventListener("click", () => {
-  displayValue = displayValue.slice(0, -1);
-  currentDisplay.textContent = displayValue;
-});
-
-modButton.addEventListener("click", () => {
-  firstNumber = parseFloat(displayValue);
-  operator = modButton.textContent;
-  displayValue = "";
-  previousDisplay.textContent = firstNumber + `${operator}`;
+  decreaseDisplayValueBy1();
+  setCurrentDisplay(displayValue);
 });
