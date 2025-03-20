@@ -16,100 +16,100 @@ const modButton = document.querySelector(".special-button-mod");
 
 // Functions for add, substract, multiply, divide
 function add(a, b) {
-    return a + b;
+  return a + b;
 }
 
 function substract(a, b) {
-    return a - b;
+  return a - b;
 }
 
 function multiply(a, b) {
-    return a * b;
+  return a * b;
 }
 
 function divide(a, b) {
-    return (a / b).toFixed(4);
+  return (a / b).toFixed(4);
 }
 
 function setFirstNumber(firstN) {
-    firstNumber = parseFloat(firstN);
+  firstNumber = parseFloat(firstN);
 }
 
 function setSecondNumber(secondN) {
-    secondNumber = parseFloat(secondN);
+  secondNumber = parseFloat(secondN);
 }
 
 // a function the creates an operation
 function operate(a, operator, b) {
-    let result = 0;
+  let result = 0;
 
-    if (operator === "+") {
-        result = add(a, b);
-    } else if (operator === "-") {
-        result = substract(a, b);
-    } else if (operator === "x") {
-        result = multiply(a, b);
-    } else if (operator === "÷") {
-        if (b === 0) {
-            return "ERROR: Division 0!";
-        }
-        result = divide(a, b);
-    } else if (operator === "%"){
-        result = a % b;
-    } else {
-        return "ERROR";
+  if (operator === "+") {
+    result = add(a, b);
+  } else if (operator === "-") {
+    result = substract(a, b);
+  } else if (operator === "x") {
+    result = multiply(a, b);
+  } else if (operator === "÷") {
+    if (b === 0) {
+      return "ERROR: Division 0!";
     }
+    result = divide(a, b);
+  } else if (operator === "%") {
+    result = a % b;
+  } else {
+    return "ERROR";
+  }
 
-    return result;
+  return result;
 }
 
 //when clicking on buttons, display them
 function showNumbers() {
-    numberButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const number = button.textContent;
-            displayValue += number;
-            currentDisplay.textContent = displayValue;
-        });
+  numberButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const number = button.textContent;
+      displayValue += number;
+      currentDisplay.textContent = displayValue;
     });
+  });
 }
 
 showNumbers();
 
 operatorButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        if (button.textContent === "=") return;
-        setFirstNumber(displayValue);
-        operator = button.textContent;
-        displayValue = "";
-        previousDisplay.textContent = firstNumber + `${operator}`;
-    });
+  button.addEventListener("click", () => {
+    if (button.textContent === "=") return;
+    setFirstNumber(displayValue);
+    operator = button.textContent;
+    displayValue = "";
+    previousDisplay.textContent = firstNumber + `${operator}`;
+  });
 });
 
 equalButton.addEventListener("click", () => {
-    setSecondNumber(displayValue);
-    let result = operate(firstNumber, operator, secondNumber);
-    displayValue = result.toString();
-    currentDisplay.textContent = displayValue;
-    previousDisplay.textContent = "";
+  setSecondNumber(displayValue);
+  let result = operate(firstNumber, operator, secondNumber);
+  displayValue = result.toString();
+  currentDisplay.textContent = displayValue;
+  previousDisplay.textContent = "";
 });
 
 acButton.addEventListener("click", () => {
-    firstNumber = undefined;
-    secondNumber = undefined;
-    operator = undefined;
-    displayValue = "";
-    currentDisplay.textContent = displayValue;
+  firstNumber = undefined;
+  secondNumber = undefined;
+  operator = undefined;
+  displayValue = "";
+  currentDisplay.textContent = displayValue;
 });
 
 delButton.addEventListener("click", () => {
-    displayValue = displayValue.slice(0, -1);
-    currentDisplay.textContent = displayValue;
+  displayValue = displayValue.slice(0, -1);
+  currentDisplay.textContent = displayValue;
 });
 
 modButton.addEventListener("click", () => {
-    firstNumber = parseFloat(displayValue);
-    operator = modButton.textContent;
-    displayValue = "";
-    previousDisplay.textContent = firstNumber + `${operator}`;
+  firstNumber = parseFloat(displayValue);
+  operator = modButton.textContent;
+  displayValue = "";
+  previousDisplay.textContent = firstNumber + `${operator}`;
 });
