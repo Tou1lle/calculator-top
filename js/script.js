@@ -79,6 +79,11 @@ function clearOperator() {
   operator = null;
 }
 
+function clearNumbers() {
+  firstNumber = null;
+  secondNumber = null;
+}
+
 function increaseDisplayValue(buttonNumber) {
   displayValue += buttonNumber;
 }
@@ -126,16 +131,17 @@ showNumbers();
 
 operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
-    if (button.textContent === "=") return;
     setFirstNumber(displayValue);
     setOperator(button.textContent);
     clearDisplayValue();
+    clearCurrentDisplay();
     setPreviousDisplay(`${firstNumber} ${operator}`);
   });
 });
 
 equalButton.addEventListener("click", () => {
   setSecondNumber(displayValue);
+  if (!firstNumber || !secondNumber) return;
   let result = operate(firstNumber, operator, secondNumber);
   setDisplayValue(result.toString());
   setCurrentDisplay(displayValue);
