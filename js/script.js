@@ -2,7 +2,8 @@
 let firstNumber;
 let secondNumber;
 let operator;
-let displayValue = "";
+let currentValue = "";
+let resultFromCalc;
 
 //get the display, buttons
 const numberButtons = document.querySelectorAll(".number-button");
@@ -43,8 +44,8 @@ function setOperator(operatorButton) {
   operator = operatorButton;
 }
 
-function setDisplayValue(textNumber) {
-  displayValue = textNumber;
+function setCurrentValue(textNumber) {
+  currentValue = textNumber;
 }
 
 function setCurrentDisplay(textNumber) {
@@ -55,8 +56,8 @@ function setPreviousDisplay(textNumber) {
   previousDisplay.textContent = textNumber;
 }
 
-function clearDisplayValue() {
-  displayValue = "";
+function clearCurrentValue() {
+  currentValue = "";
 }
 
 function clearCurrentDisplay() {
@@ -84,12 +85,12 @@ function clearNumbers() {
   secondNumber = null;
 }
 
-function increaseDisplayValue(buttonNumber) {
-  displayValue += buttonNumber;
+function increaseCurrentValue(buttonNumber) {
+  currentValue += buttonNumber;
 }
 
-function decreaseDisplayValueBy1() {
-  displayValue = displayValue.slice(0, -1);
+function decreaseCurrentValueBy1() {
+  currentValue = currentValue.slice(0, -1);
 }
 
 // a function the creates an operation
@@ -121,8 +122,8 @@ function showNumbers() {
   numberButtons.forEach(button => {
     button.addEventListener("click", () => {
       const number = button.textContent;
-      increaseDisplayValue(number);
-      setCurrentDisplay(displayValue);
+      increaseCurrentValue(number);
+      setCurrentDisplay(currentValue);
     });
   });
 }
@@ -131,20 +132,20 @@ showNumbers();
 
 operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
-    setFirstNumber(displayValue);
+    setFirstNumber(currentValue);
     setOperator(button.textContent);
-    clearDisplayValue();
+    clearCurrentValue();
     clearCurrentDisplay();
     setPreviousDisplay(`${firstNumber} ${operator}`);
   });
 });
 
 equalButton.addEventListener("click", () => {
-  setSecondNumber(displayValue);
-  if (!firstNumber || !secondNumber) return;
-  let result = operate(firstNumber, operator, secondNumber);
-  setDisplayValue(result.toString());
-  setCurrentDisplay(displayValue);
+  setSecondNumber(currentValue);
+  if (!firstNumber || !secondNumber || !operator) return;
+  resultFromCalc = operate(firstNumber, operator, secondNumber);
+  setCurrentValue(resultFromCalc.toString());
+  setCurrentDisplay(currentValue);
   clearPreviousDisplay();
   clearOperator();
 });
@@ -153,12 +154,12 @@ acButton.addEventListener("click", () => {
   clearFirstN();
   clearSecondN();
   clearOperator();
-  clearDisplayValue();
+  clearCurrentValue();
   clearCurrentDisplay();
   clearPreviousDisplay();
 });
 
 delButton.addEventListener("click", () => {
-  decreaseDisplayValueBy1();
-  setCurrentDisplay(displayValue);
+  decreaseCurrentValueBy1();
+  setCurrentDisplay(currentValue);
 });
