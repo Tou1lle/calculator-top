@@ -156,7 +156,7 @@ operatorButtons.forEach(button => {
 
 equalButton.addEventListener("click", () => {
   setSecondNumber(currentValue);
-  if (!firstNumber || !secondNumber || !operator) return;
+  if (isNaN(firstNumber) || isNaN(secondNumber) || !operator) return;
   resultFromCalc = operate(firstNumber, operator, secondNumber);
   setCurrentValue(resultFromCalc.toString());
   setCurrentDisplay(currentValue);
