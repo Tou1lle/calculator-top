@@ -39,11 +39,11 @@ function divide(a, b) {
 }
 
 function setFirstNumber(firstN) {
-  firstNumber = parseInt(firstN);
+  firstNumber = parseFloat(firstN);
 }
 
 function setSecondNumber(secondN) {
-  secondNumber = parseInt(secondN);
+  secondNumber = parseFloat(secondN);
 }
 
 function setOperator(operatorButton) {
