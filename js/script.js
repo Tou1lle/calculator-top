@@ -132,6 +132,20 @@ showNumbers();
 
 operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
+    if (!currentDisplay.textContent) return;
+    if (operator) {
+      setSecondNumber(currentValue);
+      resultFromCalc = operate(firstNumber, operator, secondNumber);
+      setFirstNumber(resultFromCalc);
+      clearOperator();
+      clearSecondN();
+      clearCurrentDisplay();
+      clearCurrentValue();
+      setOperator(button.textContent);
+      setPreviousDisplay(`${firstNumber} ${operator}`);
+      return;
+    }
+
     setFirstNumber(currentValue);
     setOperator(button.textContent);
     clearCurrentValue();
@@ -147,6 +161,8 @@ equalButton.addEventListener("click", () => {
   setCurrentValue(resultFromCalc.toString());
   setCurrentDisplay(currentValue);
   clearPreviousDisplay();
+  clearFirstN();
+  clearSecondN();
   clearOperator();
 });
 
