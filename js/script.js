@@ -29,15 +29,21 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  return (a / b).toFixed(4);
+  let result = a / b;
+
+  if (result % 1 !== 0) {
+    return result.toFixed(4);
+  } 
+
+  return result;
 }
 
 function setFirstNumber(firstN) {
-  firstNumber = parseFloat(firstN);
+  firstNumber = parseInt(firstN);
 }
 
 function setSecondNumber(secondN) {
-  secondNumber = parseFloat(secondN);
+  secondNumber = parseInt(secondN);
 }
 
 function setOperator(operatorButton) {
