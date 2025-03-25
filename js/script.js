@@ -99,6 +99,10 @@ function decreaseCurrentValueBy1() {
   currentValue = currentValue.slice(0, -1);
 }
 
+function clearResult() {
+  resultFromCalc = null;
+}
+
 // a function the creates an operation
 function operate(a, operator, b) {
   let result = 0;
@@ -127,6 +131,11 @@ function operate(a, operator, b) {
 function showNumbers() {
   numberButtons.forEach(button => {
     button.addEventListener("click", () => {
+      if (!(resultFromCalc === null)) {
+        clearResult();
+        clearCurrentValue();
+        clearCurrentDisplay();
+      }
       const number = button.textContent;
       increaseCurrentValue(number);
       setCurrentDisplay(currentValue);
@@ -157,7 +166,7 @@ operatorButtons.forEach(button => {
     }
 
     setFirstNumber(currentValue);
-    
+
     if (isNaN(firstNumber)) {
       clearFirstN();
       return;
