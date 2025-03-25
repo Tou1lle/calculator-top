@@ -138,8 +138,12 @@ showNumbers();
 
 operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
-    if (!currentDisplay.textContent) return;
     if (operator) {
+      if (!currentDisplay.textContent) {
+        setOperator(button.textContent)
+        setPreviousDisplay(`${firstNumber} ${operator}`);
+        return;
+      }
       setSecondNumber(currentValue);
       resultFromCalc = operate(firstNumber, operator, secondNumber);
       setFirstNumber(resultFromCalc);
@@ -153,6 +157,11 @@ operatorButtons.forEach(button => {
     }
 
     setFirstNumber(currentValue);
+    
+    if (isNaN(firstNumber)) {
+      clearFirstN();
+      return;
+    };
     setOperator(button.textContent);
     clearCurrentValue();
     clearCurrentDisplay();
